@@ -17,7 +17,7 @@ import urllib.request
 from zoneinfo import ZoneInfo
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DATA = os.path.join(HERE, "data")
+DATA = os.path.join(HERE, "site", "data")
 JST = ZoneInfo("Asia/Tokyo")
 HKT = ZoneInfo("Asia/Hong_Kong")
 

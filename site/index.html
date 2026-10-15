@@ -20,7 +20,7 @@
   h1 small{font-size:.68rem;color:var(--sub);font-weight:400;margin-left:2px}
   .hours{font-size:.78rem;color:var(--sub);margin-top:6px}
   .hours b{color:var(--text)}
-  .state{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;padding:2px 9px;border-radius:999px;margin-left:6px;border:1px solid transparent}
+  .state{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;padding:2px 9px;border-radius:999px;margin-left:10px;border:1px solid transparent;vertical-align:1px}
   .state.open{color:#052e16;background:var(--green);border-color:var(--green)}
   .state.closed{color:var(--sub);background:transparent;border-color:var(--border)}
   .updated{font-size:.7rem;color:var(--sub);margin-top:4px}
@@ -107,8 +107,10 @@
   const cls = (w) => w >= 45 ? 'long' : w >= 15 ? 'mid' : 'short';
 
   function rideHTML(r) {
+    const closed = DATA && DATA.park && !DATA.park.open;
     let badge;
-    if (r.isOpen && r.wait > 0) badge = `<span class="wait ${cls(r.wait)}">${r.wait} 分鐘</span>`;
+    if (closed) badge = `<span class="wait none">暫停開放</span>`;
+    else if (r.isOpen && r.wait > 0) badge = `<span class="wait ${cls(r.wait)}">${r.wait} 分鐘</span>`;
     else if (r.isOpen) badge = `<span class="wait free">無需等候</span>`;
     else badge = `<span class="wait none">暫停開放</span>`;
     const t = r.updated ? new Date(r.updated).toLocaleTimeString('ja-JP', { timeZone: 'Asia/Tokyo', hour: '2-digit', minute: '2-digit' }) : '';
@@ -152,10 +154,11 @@
     $('#hours').innerHTML = `今日開放時段 <b>${esc(p.hoursOpen)}–${esc(p.hoursClose)}</b>（日本時間）` +
       `<span class="state ${p.open ? 'open' : 'closed'}">${p.open ? '園區開放中' : '已閉園'}</span>`;
     $('#updated').textContent = `資料更新：${DATA.updatedHkt}（香港時間）／ ${DATA.updatedJst}（日本時間）`;
+    const dash = p.open ? (v) => v : () => '—';   // 閉園時平均／最長等候無意義，顯示 —
     $('#tiles').innerHTML = `
-      <div class="tile"><b>${s.open}/${s.total}</b><span>有等候時間</span></div>
-      <div class="tile wait"><b>${s.avgWait}</b><span>平均等候（分鐘）</span></div>
-      <div class="tile long"><b>${s.maxWait}</b><span>最長等候（分鐘）</span></div>
+      <div class="tile"><b>${p.open ? `${s.open}/${s.total}` : `—/${s.total}`}</b><span>有等候時間</span></div>
+      <div class="tile wait"><b>${dash(s.avgWait)}</b><span>平均等候（分鐘）</span></div>
+      <div class="tile long"><b>${dash(s.maxWait)}</b><span>最長等候（分鐘）</span></div>
       <div class="tile"><b>${DATA.shows.length}</b><span>表演場次</span></div>`;
     const sh = $('#shows');
     sh.innerHTML = DATA.shows && DATA.shows.length ? DATA.shows.map((x) =>

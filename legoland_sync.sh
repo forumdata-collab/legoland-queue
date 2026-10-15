@@ -20,7 +20,7 @@ export CLOUDFLARE_API_TOKEN="${CLOUDFLARE_API_TOKEN:-$CF_WORKERS_TOKEN}"
 export CLOUDFLARE_ACCOUNT_ID="${CLOUDFLARE_ACCOUNT_ID:-$CF_ACCOUNT_ID}"
 
 if ! env -u http_proxy -u https_proxy -u HTTP_PROXY -u HTTPS_PROXY \
-     npx wrangler pages deploy . --project-name=legoland-queue --branch=main --commit-dirty=true \
+     npx wrangler pages deploy site --project-name=legoland-queue --branch=main --commit-dirty=true \
      > /home/ubuntu/legoland-map/deploy.log 2>&1; then
   echo "❌ LEGOLAND Japan 部署失敗"
   tail -5 /home/ubuntu/legoland-map/deploy.log

@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-15T08:18:41+00:00",
- "updatedJst": "2026-10-15 17:18",
- "updatedHkt": "2026-10-15 16:18",
- "rideUpdated": "2026-10-15T08:15:31.000Z",
+ "updated": "2026-10-15T08:25:30+00:00",
+ "updatedJst": "2026-10-15 17:25",
+ "updatedHkt": "2026-10-15 16:25",
+ "rideUpdated": "2026-10-15T08:24:30.000Z",
  "park": {
   "name": "LEGOLAND Japan",
   "nameZh": "日本樂高樂園（名古屋）",
@@ -30,49 +30,49 @@
      "name": "Beetle Bounce",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 7104,
      "name": "Cargo Ace",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 7124,
      "name": "Lost Kingdom Adventure",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 15138,
      "name": "Pharaoh's Revenge",
      "isOpen": true,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 7111,
      "name": "S.Q.U.I.D. Surfer",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 7107,
      "name": "Submarine Adventure",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 15137,
      "name": "The Secret Chamber of Amset-ra",
      "isOpen": true,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     }
    ]
   },
@@ -86,63 +86,63 @@
      "name": "Brick Party",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 7105,
      "name": "Cat Cloud Busters",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 7113,
      "name": "DUPLO® Express",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 15127,
      "name": "DUPLO® Play",
      "isOpen": true,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 7101,
      "name": "Imagination Celebration",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 7102,
      "name": "Observation Tower",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 15136,
      "name": "Rainbow Design Studio",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 15129,
      "name": "Rebuild The Word Center",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 15128,
      "name": "Workshop",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     }
    ]
   },
@@ -156,7 +156,7 @@
      "name": "LEGO ® Factory Tour",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     }
    ]
   },
@@ -170,35 +170,35 @@
      "name": "Dragon's Apprentice",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 15140,
      "name": "Kingdom Games",
      "isOpen": true,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 13714,
      "name": "Merlin's Challenge",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 7120,
      "name": "Merlin's Flying Machines",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 7108,
      "name": "The Dragon",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     }
    ]
   },
@@ -212,70 +212,70 @@
      "name": "City Airport",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 7106,
      "name": "Coast Guard HQ",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 7114,
      "name": "Driving School",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 7110,
      "name": "Jr. Driving School",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 15132,
      "name": "Police Building Experience",
      "isOpen": true,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 7122,
      "name": "Rescue Academy",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 15133,
      "name": "Splash Pad【Only for the Summer season】",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 15139,
      "name": "Stop&Go Games",
      "isOpen": true,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 15130,
      "name": "The Wharf",
      "isOpen": true,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 17483,
      "name": "Water Maze",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     }
    ]
   },
@@ -289,42 +289,42 @@
      "name": "Cole's Rock Climbing Wall",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 7117,
      "name": "Flying NINJAGO",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 15144,
      "name": "Jay's Lightning Drill",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 7103,
      "name": "Kai's Sky Masters",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 7123,
      "name": "Lloyd's Spinjitzu Spinner",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 15141,
      "name": "NINJA Games",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     }
    ]
   },
@@ -338,7 +338,7 @@
      "name": "Miniland",
      "isOpen": true,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     }
    ]
   },
@@ -352,35 +352,35 @@
      "name": "Anchors Away!",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 15143,
      "name": "Blue Coat Games",
      "isOpen": true,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 15135,
      "name": "Build a Boat",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 15131,
      "name": "Castaway Camp",
      "isOpen": true,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     },
     {
      "id": 7112,
      "name": "Splash Battle",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     }
    ]
   },
@@ -394,7 +394,7 @@
      "name": "Ocean King Games",
      "isOpen": true,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     }
    ]
   },
@@ -408,7 +408,7 @@
      "name": "Kitchen Car Event Area",
      "isOpen": false,
      "wait": 0,
-     "updated": "2026-10-15T08:15:31.000Z"
+     "updated": "2026-10-15T08:24:30.000Z"
     }
    ]
   }
