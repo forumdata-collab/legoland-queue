@@ -9,6 +9,8 @@
 <meta property="og:url" content="https://legoland.we1co.me/">
 <meta property="og:type" content="website">
 <title>名古屋 LEGOLAND 即時狀況 | LEGOLAND Japan Wait Times</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="vendor/leaflet.css">
 <style>
   :root{--bg:#0f172a;--card:#1e293b;--card2:#24334a;--text:#e2e8f0;--sub:#94a3b8;--green:#22c55e;--amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;--purple:#a855f7;--border:#334155;--lego:#f7d117}
   *{margin:0;padding:0;box-sizing:border-box}
@@ -24,6 +26,15 @@
   .state.open{color:#052e16;background:var(--green);border-color:var(--green)}
   .state.closed{color:var(--sub);background:transparent;border-color:var(--border)}
   .updated{font-size:.7rem;color:var(--sub);margin-top:4px}
+  #map{height:46vh;min-height:280px;border-radius:13px;border:1px solid var(--border);margin:12px 0 2px;z-index:1;background:#0b1220}
+  #map .leaflet-tile{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.9) saturate(.85)}
+  #map .leaflet-container{background:#0b1220}
+  .pin{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;border-radius:9px;padding:1px 6px;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.35)}
+  .pin.short{background:#15803d}.pin.mid{background:#b45309}.pin.long{background:#b91c1c}.pin.none{background:#475569}
+  .area-label{font-size:11px;font-weight:600;color:#e2e8f0;background:rgba(15,23,42,.72);border:1px solid rgba(148,163,184,.5);border-radius:7px;padding:1px 6px;white-space:nowrap}
+  .mapnote{font-size:.68rem;color:var(--sub);margin:6px 2px 0;line-height:1.6}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.68rem;color:var(--sub);margin:6px 2px 0}
+  .legend i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:4px;vertical-align:-1px}
   .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px;margin:12px 0 4px}
   .tile{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:9px 11px;text-align:center}
   .tile b{display:block;font-size:1.25rem;font-variant-numeric:tabular-nums}
@@ -72,6 +83,15 @@
     <div class="updated" id="updated"></div>
   </header>
 
+  <div id="map"></div>
+  <div class="legend">
+    <span><i style="background:#15803d"></i>15 分鐘內</span>
+    <span><i style="background:#b45309"></i>15–44 分鐘</span>
+    <span><i style="background:#b91c1c"></i>45 分鐘以上</span>
+    <span><i style="background:#475569"></i>暫停／無等候</span>
+  </div>
+  <div class="mapnote" id="mapnote"></div>
+
   <div class="tiles" id="tiles"></div>
 
   <div class="controls">
@@ -96,6 +116,7 @@
   </footer>
 </div>
 
+<script src="vendor/leaflet.js"></script>
 <script>
 (() => {
   const $ = (s) => document.querySelector(s);
@@ -167,10 +188,58 @@
       : '<div class="empty">今日暫無表演資料。</div>';
   }
 
+  let map = null, pinLayer = null, areaLayer = null;
+
+  function pinClass(r) {
+    if (!r.isOpen) return 'none';
+    if (r.wait >= 45) return 'long';
+    if (r.wait >= 15) return 'mid';
+    return 'short';
+  }
+
+  function drawMap() {
+    if (!window.L || !DATA.geo) { $('#mapnote').textContent = '地圖載入失敗。'; return; }
+    const g = DATA.geo;
+    if (!map) {
+      map = L.map('map', { scrollWheelZoom: false, zoomControl: true }).setView(g.center, 17);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19, attribution: '© OpenStreetMap contributors',
+      }).addTo(map);
+      L.circleMarker(g.center, { radius: 5, color: '#f7d117', weight: 2, fillOpacity: .9 })
+        .addTo(map).bindPopup('LEGOLAND Japan 樂園中心');
+      pinLayer = L.layerGroup().addTo(map);
+      areaLayer = L.layerGroup().addTo(map);
+    }
+    pinLayer.clearLayers(); areaLayer.clearLayers();
+    const closed = !DATA.park.open;
+    let located = 0;
+    DATA.lands.forEach((l) => {
+      const pts = [];
+      l.rides.forEach((r) => {
+        if (!r.lat) return;
+        located++; pts.push([r.lat, r.lon]);
+        const cls = closed ? 'none' : pinClass(r);
+        const label = closed ? '—' : (r.isOpen ? (r.wait > 0 ? `${r.wait}′` : '即入') : '—');
+        L.marker([r.lat, r.lon], {
+          icon: L.divIcon({ className: '', html: `<span class="pin ${cls}">${label}</span>`, iconSize: [30, 18], iconAnchor: [15, 9] }),
+          title: r.name,
+        }).addTo(pinLayer).bindPopup(
+          `<b>${esc(r.name)}</b><br>${esc(l.nameZh || l.name)}<br>` +
+          (closed ? '園區已閉園' : r.isOpen ? (r.wait > 0 ? `等候 ${r.wait} 分鐘` : '開放・無需等候') : '暫停開放'));
+      });
+      if (pts.length) {
+        const lat = pts.reduce((a, p) => a + p[0], 0) / pts.length;
+        const lon = pts.reduce((a, p) => a + p[1], 0) / pts.length;
+        L.marker([lat, lon], { icon: L.divIcon({ className: '', html: `<span class="area-label">${esc(l.nameZh || l.name)}</span>`, iconSize: [90, 16], iconAnchor: [45, 8] }), interactive: false }).addTo(areaLayer);
+      }
+    });
+    $('#mapnote').innerHTML = `地圖已定位 <b>${located}/${g.total}</b> 項設施（座標來自 ${esc(g.source)}）；未定位嘅設施只喺下方清單顯示。園區範圍僅供參考。`;
+  }
+
   function load() {
     fetch(`data/legoland.json?cb=${Date.now()}`)
       .then((r) => r.json())
-      .then((j) => { DATA = j; renderHead(); render(); })
+      .then((j) => { DATA = j; renderHead(); render(); drawMap(); })
       .catch(() => { $('#updated').textContent = '資料載入失敗，請稍後再試。'; });
   }
 

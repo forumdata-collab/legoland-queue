@@ -1,0 +1,475 @@
+{
+ "source": "OpenStreetMap via Overpass (bbox 35.047,136.839,35.054,136.848) + 少量園內 POI",
+ "fetched": "2026-10-15",
+ "pois": [
+  {
+   "name": "名港中央IC",
+   "nameEn": "Meiko-chuo IC",
+   "kind": "",
+   "lat": 35.052102,
+   "lon": 136.841787
+  },
+  {
+   "name": "金城ふ頭二丁目",
+   "nameEn": "Kinjofuto 2-chome",
+   "kind": "",
+   "lat": 35.049236,
+   "lon": 136.843899
+  },
+  {
+   "name": "オブザベーション・タワー",
+   "nameEn": "Observation Tower",
+   "kind": "drop_tower",
+   "lat": 35.050398,
+   "lon": 136.844592
+  },
+  {
+   "name": "ミニランド",
+   "nameEn": "Miniland",
+   "kind": "amusement_ride",
+   "lat": 35.050589,
+   "lon": 136.844095
+  },
+  {
+   "name": "ブリック・ハウス・バーガー",
+   "nameEn": "Brick House Burgers",
+   "kind": "fast_food",
+   "lat": 35.05052,
+   "lon": 136.841748
+  },
+  {
+   "name": "レスキュー・アカデミー",
+   "nameEn": "Rescue Academy",
+   "kind": "amusement_ride",
+   "lat": 35.050292,
+   "lon": 136.841974
+  },
+  {
+   "name": "ザ・ドラゴン",
+   "nameEn": "The Dragon",
+   "kind": "roller_coaster",
+   "lat": 35.050049,
+   "lon": 136.842842
+  },
+  {
+   "name": "ビルド・アンド・テスト",
+   "nameEn": "Build+Test",
+   "kind": "amusement_ride",
+   "lat": 35.050866,
+   "lon": 136.845115
+  },
+  {
+   "name": "レゴニンジャゴー・ライブ",
+   "nameEn": "Ninjago",
+   "kind": "amusement_ride",
+   "lat": 35.051293,
+   "lon": 136.8448
+  },
+  {
+   "name": "The Brooklyn Cäfe",
+   "nameEn": "",
+   "kind": "pub",
+   "lat": 35.050086,
+   "lon": 136.846816
+  },
+  {
+   "name": "Fabrik's",
+   "nameEn": "",
+   "kind": "fast_food",
+   "lat": 35.050644,
+   "lon": 136.847326
+  },
+  {
+   "name": "チキン・ダイナー",
+   "nameEn": "",
+   "kind": "restaurant",
+   "lat": 35.050003,
+   "lon": 136.845248
+  },
+  {
+   "name": "キャット・クラウド・バスターズ",
+   "nameEn": "",
+   "kind": "amusement_ride",
+   "lat": 35.051012,
+   "lon": 136.844798
+  },
+  {
+   "name": "イマジネーション・セレブレーション",
+   "nameEn": "",
+   "kind": "amusement_ride",
+   "lat": 35.050844,
+   "lon": 136.844561
+  },
+  {
+   "name": "スクイッド・サーファー",
+   "nameEn": "",
+   "kind": "amusement_ride",
+   "lat": 35.050816,
+   "lon": 136.843899
+  },
+  {
+   "name": "ロスト・キングダム・アドベンチャー",
+   "nameEn": "",
+   "kind": "amusement_ride",
+   "lat": 35.051317,
+   "lon": 136.843339
+  },
+  {
+   "name": "カーゴ・エース",
+   "nameEn": "",
+   "kind": "swing_carousel",
+   "lat": 35.051054,
+   "lon": 136.843081
+  },
+  {
+   "name": "オアシス・スナック",
+   "nameEn": "",
+   "kind": "cafe",
+   "lat": 35.050859,
+   "lon": 136.843191
+  },
+  {
+   "name": "コースト・ガード・エイチキュー",
+   "nameEn": "",
+   "kind": "amusement_ride",
+   "lat": 35.051228,
+   "lon": 136.842662
+  },
+  {
+   "name": "レゴ・シティ・ビーチ・パーティ",
+   "nameEn": "",
+   "kind": "",
+   "lat": 35.051194,
+   "lon": 136.842896
+  },
+  {
+   "name": "ジュニア・ドライビング・スクール",
+   "nameEn": "",
+   "kind": "amusement_ride",
+   "lat": 35.050972,
+   "lon": 136.84162
+  },
+  {
+   "name": "マーリン・チャレンジ",
+   "nameEn": "",
+   "kind": "",
+   "lat": 35.050022,
+   "lon": 136.842211
+  },
+  {
+   "name": "ナイト・テーブル・レストラン",
+   "nameEn": "",
+   "kind": "restaurant",
+   "lat": 35.04977,
+   "lon": 136.842158
+  },
+  {
+   "name": "キング・マーケット",
+   "nameEn": "",
+   "kind": "",
+   "lat": 35.049734,
+   "lon": 136.842025
+  },
+  {
+   "name": "ドラゴン・アプレンティス",
+   "nameEn": "",
+   "kind": "roller_coaster",
+   "lat": 35.050162,
+   "lon": 136.842665
+  },
+  {
+   "name": "マーリン・フライング・マシーン",
+   "nameEn": "",
+   "kind": "",
+   "lat": 35.050409,
+   "lon": 136.842883
+  },
+  {
+   "name": "シティ・エアポート",
+   "nameEn": "",
+   "kind": "",
+   "lat": 35.050736,
+   "lon": 136.842566
+  },
+  {
+   "name": "ビッグ・ブリック・スタンド",
+   "nameEn": "",
+   "kind": "fast_food",
+   "lat": 35.05028,
+   "lon": 136.844576
+  },
+  {
+   "name": "スプラッシュ・バトル",
+   "nameEn": "",
+   "kind": "amusement_ride",
+   "lat": 35.049827,
+   "lon": 136.843808
+  },
+  {
+   "name": "アンカー・アウェイ",
+   "nameEn": "",
+   "kind": "amusement_ride",
+   "lat": 35.050268,
+   "lon": 136.844047
+  },
+  {
+   "name": "レゴランド・ジャパン・ホテル",
+   "nameEn": "",
+   "kind": "hotel",
+   "lat": 35.05037,
+   "lon": 136.846405
+  },
+  {
+   "name": "ロイド・スピン術・スピナー",
+   "nameEn": "",
+   "kind": "",
+   "lat": 35.049594,
+   "lon": 136.843162
+  },
+  {
+   "name": "フライング・ニンジャゴー",
+   "nameEn": "",
+   "kind": "drop_tower",
+   "lat": 35.049306,
+   "lon": 136.842311
+  },
+  {
+   "name": "彩 和食レストラン",
+   "nameEn": "",
+   "kind": "restaurant",
+   "lat": 35.051209,
+   "lon": 136.844331
+  },
+  {
+   "name": "Neko Neko Cheesecake",
+   "nameEn": "",
+   "kind": "",
+   "lat": 35.050764,
+   "lon": 136.846933
+  },
+  {
+   "name": "ロサンゼルス大通",
+   "nameEn": "",
+   "kind": "",
+   "lat": 35.051653,
+   "lon": 136.845228
+  },
+  {
+   "name": "ロサンゼルス大通",
+   "nameEn": "",
+   "kind": "",
+   "lat": 35.051994,
+   "lon": 136.842319
+  },
+  {
+   "name": "ロサンゼルス大通",
+   "nameEn": "",
+   "kind": "",
+   "lat": 35.05205,
+   "lon": 136.845965
+  },
+  {
+   "name": "ロサンゼルス大通",
+   "nameEn": "",
+   "kind": "",
+   "lat": 35.051643,
+   "lon": 136.84705
+  },
+  {
+   "name": "ロサンゼルス大通",
+   "nameEn": "",
+   "kind": "",
+   "lat": 35.051608,
+   "lon": 136.842566
+  },
+  {
+   "name": "南京大路",
+   "nameEn": "",
+   "kind": "",
+   "lat": 35.049026,
+   "lon": 136.841885
+  },
+  {
+   "name": "第3展示館",
+   "nameEn": "3rd Exhibition Hall",
+   "kind": "yes",
+   "lat": 35.047052,
+   "lon": 136.844344
+  },
+  {
+   "name": "第2展示館",
+   "nameEn": "2nd Exhibition Hall",
+   "kind": "exhibition_centre",
+   "lat": 35.049059,
+   "lon": 136.845322
+  },
+  {
+   "name": "交流センター",
+   "nameEn": "Main Hall",
+   "kind": "yes",
+   "lat": 35.047996,
+   "lon": 136.845274
+  },
+  {
+   "name": "イベント館",
+   "nameEn": "Event Hall",
+   "kind": "exhibition_centre",
+   "lat": 35.047996,
+   "lon": 136.844597
+  },
+  {
+   "name": "メキシコ大通",
+   "nameEn": "",
+   "kind": "",
+   "lat": 35.046237,
+   "lon": 136.845493
+  },
+  {
+   "name": "武田テバオーシャンアリーナ",
+   "nameEn": "",
+   "kind": "yes",
+   "lat": 35.048903,
+   "lon": 136.847232
+  },
+  {
+   "name": "メイカーズ・ピア",
+   "nameEn": "Maker’s Pier",
+   "kind": "park",
+   "lat": 35.050545,
+   "lon": 136.847181
+  },
+  {
+   "name": "レゴランド・ジャパン",
+   "nameEn": "Legoland Japan",
+   "kind": "theme_park",
+   "lat": 35.050299,
+   "lon": 136.843552
+  },
+  {
+   "name": "伊勢湾岸自動車道",
+   "nameEn": "",
+   "kind": "",
+   "lat": 35.051411,
+   "lon": 136.846993
+  },
+  {
+   "name": "南京大路",
+   "nameEn": "",
+   "kind": "",
+   "lat": 35.049026,
+   "lon": 136.841888
+  },
+  {
+   "name": "ブリック・パーティ",
+   "nameEn": "",
+   "kind": "carousel",
+   "lat": 35.050237,
+   "lon": 136.845155
+  },
+  {
+   "name": "オーシャン・キング・ゲーム",
+   "nameEn": "",
+   "kind": "yes",
+   "lat": 35.050975,
+   "lon": 136.844394
+  },
+  {
+   "name": "サブマリン・アドベンチャー",
+   "nameEn": "Submarine Adventure",
+   "kind": "dark_ride",
+   "lat": 35.051331,
+   "lon": 136.844106
+  },
+  {
+   "name": "ファラオ・リベンジ",
+   "nameEn": "",
+   "kind": "indoor_play",
+   "lat": 35.05111,
+   "lon": 136.843581
+  },
+  {
+   "name": "レインボー･デザイン･スタジオ",
+   "nameEn": "",
+   "kind": "indoor_play",
+   "lat": 35.050668,
+   "lon": 136.842222
+  },
+  {
+   "name": "パレス・シネマ",
+   "nameEn": "",
+   "kind": "cinema",
+   "lat": 35.050552,
+   "lon": 136.842298
+  },
+  {
+   "name": "ポリス・ビルディング・エクスペリエンス",
+   "nameEn": "",
+   "kind": "indoor_play",
+   "lat": 35.050455,
+   "lon": 136.842483
+  },
+  {
+   "name": "ミニフィギュア・マーケット",
+   "nameEn": "",
+   "kind": "yes",
+   "lat": 35.050645,
+   "lon": 136.844705
+  },
+  {
+   "name": "デュプロ・プレイ",
+   "nameEn": "",
+   "kind": "sports_hall",
+   "lat": 35.050012,
+   "lon": 136.844659
+  },
+  {
+   "name": "ニンジャ・キッチン",
+   "nameEn": "",
+   "kind": "cafe",
+   "lat": 35.049762,
+   "lon": 136.843078
+  },
+  {
+   "name": "ポートメッセなごや 第一展示館",
+   "nameEn": "",
+   "kind": "exhibition_centre",
+   "lat": 35.047177,
+   "lon": 136.848962
+  },
+  {
+   "name": "ロサンゼルス大通",
+   "nameEn": "",
+   "kind": "",
+   "lat": 35.052094,
+   "lon": 136.847954
+  },
+  {
+   "name": "伊勢湾岸自動車道;伊勢湾岸道路",
+   "nameEn": "Isewangan Expressway",
+   "kind": "",
+   "lat": 35.053156,
+   "lon": 136.856531
+  },
+  {
+   "name": "伊勢湾岸自動車道;伊勢湾岸道路",
+   "nameEn": "Isewangan Expressway",
+   "kind": "",
+   "lat": 35.052999,
+   "lon": 136.856637
+  },
+  {
+   "name": "伊勢湾岸自動車道;伊勢湾岸道路",
+   "nameEn": "Isewangan Expressway",
+   "kind": "",
+   "lat": 35.052121,
+   "lon": 136.836192
+  },
+  {
+   "name": "伊勢湾岸自動車道;伊勢湾岸道路",
+   "nameEn": "Isewangan Expressway",
+   "kind": "",
+   "lat": 35.051803,
+   "lon": 136.836041
+  }
+ ]
+}

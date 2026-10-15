@@ -1,0 +1,31 @@
+{
+  "_note": "OSM 日文 POI 名 → queue-times 英文設施名 對照表（人手核對）。只在兩邊都對得上時才落座標，唔靠估算。",
+  "_source": "OpenStreetMap via Overpass, bbox 35.047,136.839,35.054,136.848",
+  "parkCenter": [35.050299, 136.843552],
+  "mappings": {
+    "アンカー・アウェイ": "Anchors Away!",
+    "イマジネーション・セレブレーション": "Imagination Celebration",
+    "オブザベーション・タワー": "Observation Tower",
+    "カーゴ・エース": "Cargo Ace",
+    "キャット・クラウド・バスターズ": "Cat Cloud Busters",
+    "コースト・ガード・エイチキュー": "Coast Guard HQ",
+    "サブマリン・アドベンチャー": "Submarine Adventure",
+    "ザ・ドラゴン": "The Dragon",
+    "ジュニア・ドライビング・スクール": "Jr. Driving School",
+    "スクイッド・サーファー": "S.Q.U.I.D. Surfer",
+    "スプラッシュ・バトル": "Splash Battle",
+    "ドラゴン・アプレンティス": "Dragon's Apprentice",
+    "ファラオ・リベンジ": "Pharaoh's Revenge",
+    "フライング・ニンジャゴー": "Flying NINJAGO",
+    "ブリック・パーティ": "Brick Party",
+    "ポリス・ビルディング・エクスペリエンス": "Police Building Experience",
+    "ミニランド": "Miniland",
+    "レスキュー・アカデミー": "Rescue Academy",
+    "ロスト・キングダム・アドベンチャー": "Lost Kingdom Adventure",
+    "レインボー･デザイン･スタジオ": "Rainbow Design Studio",
+    "ロイド・スピン術・スピナー": "Lloyd's Spinjitzu Spinner",
+    "デュプロ・プレイ": "DUPLO® Play",
+    "オーシャン・キング・ゲーム": "Ocean King Games",
+    "ビルド・アンド・テスト": "Build & Test"
+  }
+}

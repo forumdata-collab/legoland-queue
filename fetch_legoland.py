@@ -96,13 +96,36 @@ def fmt_hhmm(iso):
         return ""
 
 
+def load_geo():
+    """OSM 座標 fixture + 人手對照表。冇座標嘅設施唔會硬塞位置。"""
+    try:
+        pois = json.load(open(os.path.join(HERE, "data", "osm-pois.json"), encoding="utf-8"))["pois"]
+        m = json.load(open(os.path.join(HERE, "data", "osm-map.json"), encoding="utf-8"))
+    except Exception as e:
+        print(f"⚠️ 讀唔到 OSM fixture: {e}", file=sys.stderr)
+        return {}, [35.0503, 136.84355]
+    by_en = {}
+    for p in pois:
+        en = m.get("mappings", {}).get(p.get("name", ""))
+        if en:
+            by_en[en] = {"lat": p["lat"], "lon": p["lon"], "osmName": p["name"], "kind": p.get("kind", "")}
+    return by_en, m.get("parkCenter", [35.0503, 136.84355])
+
+
 def main():
     qt = fetch_queue_times()
+    geo, center = load_geo()
     live = fetch_wiki("live")
     sched = fetch_wiki("schedule")
 
     lands = land_of_ride(qt)
     rides = [r for l in lands for r in l["rides"]]
+    # 掛上 OSM 座標（對唔上就冇 coords，前端只會在清單顯示）
+    for r in rides:
+        g = geo.get(r["name"])
+        if g:
+            r["lat"], r["lon"] = g["lat"], g["lon"]
+    located = [r for r in rides if r.get("lat")]
     open_rides = [r for r in rides if r["isOpen"]]
     waits = [r["wait"] for r in open_rides if r["wait"] > 0]
 
@@ -156,6 +179,8 @@ def main():
             "avgWait": round(sum(waits) / len(waits)) if waits else 0,
             "maxWait": max(waits) if waits else 0,
         },
+        "geo": {"center": center, "located": len(located), "total": len(rides),
+                "source": "OpenStreetMap (ODbL) via Overpass API"},
         "lands": lands,
         "shows": sorted(shows, key=lambda s: (s["times"][0] if s["times"] else "99:99")),
         "sources": [
