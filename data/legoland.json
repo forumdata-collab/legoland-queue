@@ -1,0 +1,491 @@
+{
+ "updated": "2026-10-15T08:18:41+00:00",
+ "updatedJst": "2026-10-15 17:18",
+ "updatedHkt": "2026-10-15 16:18",
+ "rideUpdated": "2026-10-15T08:15:31.000Z",
+ "park": {
+  "name": "LEGOLAND Japan",
+  "nameZh": "日本樂高樂園（名古屋）",
+  "open": false,
+  "status": "CLOSED",
+  "hoursOpen": "10:00",
+  "hoursClose": "17:00",
+  "hoursDate": "2026-10-15"
+ },
+ "stats": {
+  "total": 46,
+  "open": 0,
+  "openFlagged": 11,
+  "avgWait": 0,
+  "maxWait": 0
+ },
+ "lands": [
+  {
+   "id": 1039,
+   "name": "Adventure",
+   "nameZh": "冒險世界",
+   "rides": [
+    {
+     "id": 7116,
+     "name": "Beetle Bounce",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 7104,
+     "name": "Cargo Ace",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 7124,
+     "name": "Lost Kingdom Adventure",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 15138,
+     "name": "Pharaoh's Revenge",
+     "isOpen": true,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 7111,
+     "name": "S.Q.U.I.D. Surfer",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 7107,
+     "name": "Submarine Adventure",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 15137,
+     "name": "The Secret Chamber of Amset-ra",
+     "isOpen": true,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    }
+   ]
+  },
+  {
+   "id": 1038,
+   "name": "Bricktopia",
+   "nameZh": "積木烏托邦",
+   "rides": [
+    {
+     "id": 7118,
+     "name": "Brick Party",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 7105,
+     "name": "Cat Cloud Busters",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 7113,
+     "name": "DUPLO® Express",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 15127,
+     "name": "DUPLO® Play",
+     "isOpen": true,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 7101,
+     "name": "Imagination Celebration",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 7102,
+     "name": "Observation Tower",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 15136,
+     "name": "Rainbow Design Studio",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 15129,
+     "name": "Rebuild The Word Center",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 15128,
+     "name": "Workshop",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    }
+   ]
+  },
+  {
+   "id": 1037,
+   "name": "Factory Zone",
+   "nameZh": "樂高工廠區",
+   "rides": [
+    {
+     "id": 7121,
+     "name": "LEGO ® Factory Tour",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    }
+   ]
+  },
+  {
+   "id": 1041,
+   "name": "Knight’s Kingdom",
+   "nameZh": "騎士王國",
+   "rides": [
+    {
+     "id": 7115,
+     "name": "Dragon's Apprentice",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 15140,
+     "name": "Kingdom Games",
+     "isOpen": true,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 13714,
+     "name": "Merlin's Challenge",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 7120,
+     "name": "Merlin's Flying Machines",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 7108,
+     "name": "The Dragon",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    }
+   ]
+  },
+  {
+   "id": 1040,
+   "name": "LEGO City",
+   "nameZh": "樂高城市",
+   "rides": [
+    {
+     "id": 7109,
+     "name": "City Airport",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 7106,
+     "name": "Coast Guard HQ",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 7114,
+     "name": "Driving School",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 7110,
+     "name": "Jr. Driving School",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 15132,
+     "name": "Police Building Experience",
+     "isOpen": true,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 7122,
+     "name": "Rescue Academy",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 15133,
+     "name": "Splash Pad【Only for the Summer season】",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 15139,
+     "name": "Stop&Go Games",
+     "isOpen": true,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 15130,
+     "name": "The Wharf",
+     "isOpen": true,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 17483,
+     "name": "Water Maze",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    }
+   ]
+  },
+  {
+   "id": 1043,
+   "name": "LEGO NINJAGO World",
+   "nameZh": "旋風忍者世界",
+   "rides": [
+    {
+     "id": 15134,
+     "name": "Cole's Rock Climbing Wall",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 7117,
+     "name": "Flying NINJAGO",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 15144,
+     "name": "Jay's Lightning Drill",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 7103,
+     "name": "Kai's Sky Masters",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 7123,
+     "name": "Lloyd's Spinjitzu Spinner",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 15141,
+     "name": "NINJA Games",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    }
+   ]
+  },
+  {
+   "id": 1044,
+   "name": "Miniland",
+   "nameZh": "迷你世界",
+   "rides": [
+    {
+     "id": 15126,
+     "name": "Miniland",
+     "isOpen": true,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    }
+   ]
+  },
+  {
+   "id": 1042,
+   "name": "Pirate Shores",
+   "nameZh": "海盜海岸",
+   "rides": [
+    {
+     "id": 7100,
+     "name": "Anchors Away!",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 15143,
+     "name": "Blue Coat Games",
+     "isOpen": true,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 15135,
+     "name": "Build a Boat",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 15131,
+     "name": "Castaway Camp",
+     "isOpen": true,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    },
+    {
+     "id": 7112,
+     "name": "Splash Battle",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    }
+   ]
+  },
+  {
+   "id": 1045,
+   "name": "LEGOLAND Japan Hotel & Outer Area",
+   "nameZh": "酒店與外圍區",
+   "rides": [
+    {
+     "id": 15142,
+     "name": "Ocean King Games",
+     "isOpen": true,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    }
+   ]
+  },
+  {
+   "id": 0,
+   "name": "",
+   "nameZh": "其他",
+   "rides": [
+    {
+     "id": 17910,
+     "name": "Kitchen Car Event Area",
+     "isOpen": false,
+     "wait": 0,
+     "updated": "2026-10-15T08:15:31.000Z"
+    }
+   ]
+  }
+ ],
+ "shows": [
+  {
+   "name": "LEGO® NINJAGO® Live",
+   "status": "CLOSED",
+   "times": [
+    "11:00"
+   ]
+  },
+  {
+   "name": "モンスター・パーティからの大脱出",
+   "status": "CLOSED",
+   "times": [
+    "11:15",
+    "12:00",
+    "13:30",
+    "14:15",
+    "15:45",
+    "16:30"
+   ]
+  },
+  {
+   "name": "ホプシーとあそぼう！-PLAY TIME with HOPSY-",
+   "status": "CLOSED",
+   "times": [
+    "12:00",
+    "15:00"
+   ]
+  },
+  {
+   "name": "LEGO® Dreamzzz Z-Blob Rescue Rush",
+   "status": "CLOSED",
+   "times": [
+    "12:00",
+    "15:00"
+   ]
+  },
+  {
+   "name": "LEGO® CITY 4D",
+   "status": "CLOSED",
+   "times": [
+    "12:45"
+   ]
+  },
+  {
+   "name": "LEGO® NINJAGO 4D MOVIE",
+   "status": "CLOSED",
+   "times": [
+    "15:00"
+   ]
+  },
+  {
+   "name": "またきてマーチ",
+   "status": "CLOSED",
+   "times": [
+    "16:00"
+   ]
+  },
+  {
+   "name": "LEGO® Friends 4D movie Alien Invasion",
+   "status": "CLOSED",
+   "times": [
+    "16:30"
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "name": "queue-times.com",
+   "url": "https://queue-times.com/parks/285"
+  },
+  {
+   "name": "themeparks.wiki",
+   "url": "https://api.themeparks.wiki/"
+  }
+ ]
+}

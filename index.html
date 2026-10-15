@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="日本樂高樂園（名古屋 LEGOLAND Japan）即時設施開放狀況與排隊等候時間：分區一覽、表演時間表、當日開放時段，每 5 分鐘自動更新。資料來自公開第三方 API。">
+<meta property="og:title" content="名古屋 LEGOLAND 即時狀況">
+<meta property="og:description" content="設施開放狀況 + 排隊等候時間 + 表演時間表，每 5 分鐘自動更新">
+<meta property="og:url" content="https://legoland.we1co.me/">
+<meta property="og:type" content="website">
+<title>名古屋 LEGOLAND 即時狀況 | LEGOLAND Japan Wait Times</title>
+<style>
+  :root{--bg:#0f172a;--card:#1e293b;--card2:#24334a;--text:#e2e8f0;--sub:#94a3b8;--green:#22c55e;--amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;--purple:#a855f7;--border:#334155;--lego:#f7d117}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;padding-bottom:40px;-webkit-text-size-adjust:100%}
+  .wrap{max-width:940px;margin:0 auto;padding:0 14px}
+  header{padding:18px 0 10px;border-bottom:1px solid var(--border)}
+  h1{font-size:1.16rem;font-weight:700;display:flex;align-items:center;gap:8px}
+  h1 .brick{width:13px;height:13px;border-radius:3px;background:var(--lego);box-shadow:2px 2px 0 0 #c9a90e;flex:none}
+  h1 small{font-size:.68rem;color:var(--sub);font-weight:400;margin-left:2px}
+  .hours{font-size:.78rem;color:var(--sub);margin-top:6px}
+  .hours b{color:var(--text)}
+  .state{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;padding:2px 9px;border-radius:999px;margin-left:6px;border:1px solid transparent}
+  .state.open{color:#052e16;background:var(--green);border-color:var(--green)}
+  .state.closed{color:var(--sub);background:transparent;border-color:var(--border)}
+  .updated{font-size:.7rem;color:var(--sub);margin-top:4px}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px;margin:12px 0 4px}
+  .tile{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:9px 11px;text-align:center}
+  .tile b{display:block;font-size:1.25rem;font-variant-numeric:tabular-nums}
+  .tile span{font-size:.65rem;color:var(--sub)}
+  .tile.wait b{color:var(--amber)}
+  .tile.long b{color:var(--red)}
+  .controls{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:14px 0 6px}
+  .chip{font:inherit;font-size:.78rem;padding:5px 11px;border-radius:999px;background:var(--card);border:1px solid var(--border);color:var(--sub);cursor:pointer}
+  .chip:hover{border-color:var(--blue);color:var(--text)}
+  .chip.active{background:var(--blue);border-color:var(--blue);color:#fff}
+  .chip .n{opacity:.7;margin-left:4px;font-size:.7rem}
+  .spacer{flex:1}
+  .sortsel{font:inherit;font-size:.78rem;padding:5px 8px;border-radius:8px;background:var(--card);border:1px solid var(--border);color:var(--text)}
+  h2{font-size:.86rem;font-weight:600;color:var(--sub);margin:20px 0 8px;letter-spacing:.03em}
+  .land{background:var(--card);border:1px solid var(--border);border-radius:13px;overflow:hidden;margin-bottom:10px}
+  .land .head{display:flex;align-items:center;gap:8px;padding:10px 13px;background:var(--card2);font-size:.84rem;font-weight:600}
+  .land .head .zh{font-size:.72rem;color:var(--sub);font-weight:400}
+  .land .head .spacer{flex:1}
+  .land .head .cnt{font-size:.7rem;color:var(--sub);font-variant-numeric:tabular-nums}
+  .ride{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:9px 13px;border-top:1px solid var(--border);font-size:.85rem}
+  .ride .nm{min-width:0}
+  .ride .nm span{display:block;font-size:.66rem;color:var(--sub);margin-top:1px}
+  .wait{font-size:.78rem;font-weight:700;padding:3px 10px;border-radius:9px;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .wait.short{background:rgba(34,197,94,.16);color:var(--green)}
+  .wait.mid{background:rgba(245,158,11,.16);color:var(--amber)}
+  .wait.long{background:rgba(239,68,68,.16);color:var(--red)}
+  .wait.none{background:rgba(148,163,184,.14);color:var(--sub)}
+  .wait.free{background:rgba(34,197,94,.12);color:var(--green)}
+  .showrow{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:10px 13px;margin-bottom:8px;font-size:.85rem}
+  .showrow .times{margin-top:5px;display:flex;flex-wrap:wrap;gap:6px}
+  .showrow .times span{font-size:.74rem;background:rgba(59,130,246,.14);color:#93c5fd;border-radius:6px;padding:2px 8px;font-variant-numeric:tabular-nums}
+  .empty{color:var(--sub);font-size:.82rem;padding:12px 0}
+  footer{margin-top:26px;padding-top:14px;border-top:1px solid var(--border);font-size:.7rem;color:var(--sub);line-height:1.7}
+  footer a{color:var(--blue);text-decoration:none}
+  @media(max-width:520px){
+    .ride{font-size:.82rem;padding:8px 11px}
+    h1{font-size:1.05rem}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1><span class="brick" aria-hidden="true"></span>名古屋 LEGOLAND 即時狀況<small>LEGOLAND Japan</small></h1>
+    <div class="hours" id="hours">載入中…</div>
+    <div class="updated" id="updated"></div>
+  </header>
+
+  <div class="tiles" id="tiles"></div>
+
+  <div class="controls">
+    <button class="chip active" data-filter="all">全部分區<span class="n" data-n="all"></span></button>
+    <button class="chip" data-filter="open">有等候時間<span class="n" data-n="open"></span></button>
+    <span class="spacer"></span>
+    <select class="sortsel" id="sort">
+      <option value="land">依分區</option>
+      <option value="wait">等候由長到短</option>
+      <option value="name">名稱</option>
+    </select>
+  </div>
+
+  <div id="lands"></div>
+
+  <h2>表演與活動時間表（日本時間）</h2>
+  <div id="shows"><div class="empty">載入中…</div></div>
+
+  <footer>
+    <div>本站為個人興趣項目，<b>非官方</b>，與 LEGOLAND Japan／Merlin Entertainments 無關。資料來自公開第三方 API：<a href="https://queue-times.com/parks/285" target="_blank" rel="noopener">queue-times.com</a>（設施開放與等候時間）與 <a href="https://api.themeparks.wiki/" target="_blank" rel="noopener">themeparks.wiki</a>（表演時間表、開放時段）。</div>
+    <div>等候時間由第三方收集，可能有延誤或誤差，實際情況以園方現場公佈為準。頁面每 5 分鐘自動更新。</div>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const state = { filter: 'all', sort: 'land' };
+  let DATA = null;
+
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const cls = (w) => w >= 45 ? 'long' : w >= 15 ? 'mid' : 'short';
+
+  function rideHTML(r) {
+    let badge;
+    if (r.isOpen && r.wait > 0) badge = `<span class="wait ${cls(r.wait)}">${r.wait} 分鐘</span>`;
+    else if (r.isOpen) badge = `<span class="wait free">無需等候</span>`;
+    else badge = `<span class="wait none">暫停開放</span>`;
+    const t = r.updated ? new Date(r.updated).toLocaleTimeString('ja-JP', { timeZone: 'Asia/Tokyo', hour: '2-digit', minute: '2-digit' }) : '';
+    return `<div class="ride"><div class="nm">${esc(r.name)}${t ? `<span>最後更新 ${t}（JST）</span>` : ''}</div>${badge}</div>`;
+  }
+
+  const openWait = (r) => r.isOpen && r.wait > 0;
+
+  function render() {
+    if (!DATA) return;
+    let lands = DATA.lands.map((l) => ({ ...l, rides: l.rides.filter((r) => state.filter === 'all' || openWait(r)) }))
+      .filter((l) => l.rides.length || state.filter === 'all');
+
+    const counts = { all: DATA.lands.reduce((n, l) => n + l.rides.length, 0), open: 0 };
+    DATA.lands.forEach((l) => l.rides.forEach((r) => { if (openWait(r)) counts.open++; }));
+    document.querySelectorAll('.chip .n').forEach((el) => {
+      const k = el.dataset.n; el.textContent = counts[k] ?? '';
+    });
+
+    if (state.sort === 'wait') {
+      lands = lands.map((l) => ({ ...l, rides: [...l.rides].sort((a, b) => (b.wait || -1) - (a.wait || -1)) }));
+      lands.sort((a, b) => Math.max(...b.rides.map((r) => r.wait), -1) - Math.max(...a.rides.map((r) => r.wait), -1));
+    } else if (state.sort === 'name') {
+      lands = lands.map((l) => ({ ...l, rides: [...l.rides].sort((a, b) => a.name.localeCompare(b.name)) }));
+    }
+
+    const box = $('#lands');
+    if (!lands.length) { box.innerHTML = '<div class="empty">目前冇符合條件嘅設施。</div>'; return; }
+    box.innerHTML = lands.map((l) => {
+      const openN = l.rides.filter(openWait).length;
+      return `<section class="land">
+        <div class="head">${esc(l.nameZh || l.name)}<span class="zh">${l.nameZh ? esc(l.name) : ''}</span>
+          <span class="spacer"></span><span class="cnt">${openN}/${l.rides.length} 有等候</span></div>
+        ${l.rides.map(rideHTML).join('')}
+      </section>`;
+    }).join('');
+  }
+
+  function renderHead() {
+    const p = DATA.park, s = DATA.stats;
+    $('#hours').innerHTML = `今日開放時段 <b>${esc(p.hoursOpen)}–${esc(p.hoursClose)}</b>（日本時間）` +
+      `<span class="state ${p.open ? 'open' : 'closed'}">${p.open ? '園區開放中' : '已閉園'}</span>`;
+    $('#updated').textContent = `資料更新：${DATA.updatedHkt}（香港時間）／ ${DATA.updatedJst}（日本時間）`;
+    $('#tiles').innerHTML = `
+      <div class="tile"><b>${s.open}/${s.total}</b><span>有等候時間</span></div>
+      <div class="tile wait"><b>${s.avgWait}</b><span>平均等候（分鐘）</span></div>
+      <div class="tile long"><b>${s.maxWait}</b><span>最長等候（分鐘）</span></div>
+      <div class="tile"><b>${DATA.shows.length}</b><span>表演場次</span></div>`;
+    const sh = $('#shows');
+    sh.innerHTML = DATA.shows && DATA.shows.length ? DATA.shows.map((x) =>
+      `<div class="showrow">${esc(x.name)}${x.times && x.times.length
+        ? `<div class="times">${x.times.map((t) => `<span>${esc(t)}</span>`).join('')}</div>` : ''}</div>`).join('')
+      : '<div class="empty">今日暫無表演資料。</div>';
+  }
+
+  function load() {
+    fetch(`data/legoland.json?cb=${Date.now()}`)
+      .then((r) => r.json())
+      .then((j) => { DATA = j; renderHead(); render(); })
+      .catch(() => { $('#updated').textContent = '資料載入失敗，請稍後再試。'; });
+  }
+
+  document.querySelectorAll('.chip[data-filter]').forEach((c) => c.addEventListener('click', () => {
+    document.querySelectorAll('.chip[data-filter]').forEach((x) => x.classList.toggle('active', x === c));
+    state.filter = c.dataset.filter; render();
+  }));
+  $('#sort').addEventListener('change', (e) => { state.sort = e.target.value; render(); });
+
+  load();
+  setInterval(load, 5 * 60 * 1000);
+})();
+</script>
+</body>
+</html>
