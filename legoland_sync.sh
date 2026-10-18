@@ -24,6 +24,13 @@ set -a; . /home/ubuntu/.hermes/.env; set +a
 export CLOUDFLARE_API_TOKEN="${CLOUDFLARE_API_TOKEN:-$CF_WORKERS_TOKEN}"
 export CLOUDFLARE_ACCOUNT_ID="${CLOUDFLARE_ACCOUNT_ID:-$CF_ACCOUNT_ID}"
 
+# 用戶睇得到嘅內容同上次一樣（例如閉園時段、無變化嘅等候時間）→ 唔部署，省 Pages deployment
+python3 deploy_gate.py check; dg=$?
+if [ "$dg" -eq 10 ]; then
+  printf '[%s] skip-deploy（內容無變）\n' "$(date '+%F %T')" >> /home/ubuntu/legoland-map/deploy.log
+  exit 0
+fi
+
 if ! env -u http_proxy -u https_proxy -u HTTP_PROXY -u HTTPS_PROXY \
      npx wrangler pages deploy site --project-name=legoland-queue --branch=main --commit-dirty=true \
      >> /home/ubuntu/legoland-map/deploy.log 2>&1; then
@@ -31,4 +38,5 @@ if ! env -u http_proxy -u https_proxy -u HTTP_PROXY -u HTTPS_PROXY \
   tail -5 /home/ubuntu/legoland-map/deploy.log
   exit 1
 fi
+python3 deploy_gate.py commit   # 部署成功先記住 digest（失敗唔記，下次會再試）
 exit 0

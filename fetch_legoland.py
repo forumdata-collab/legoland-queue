@@ -14,6 +14,8 @@ import json
 import os
 import re
 import sys
+import time
+import urllib.error
 import urllib.request
 from zoneinfo import ZoneInfo
 
@@ -27,6 +29,11 @@ HKT = ZoneInfo("Asia/Hong_Kong")
 
 QT_PARK = "285"
 WIKI_PARK = "0c14c187-13f5-41ef-91b1-7ecb504239a7"
+REQS = 0                  # 每次跑 upstream request 數（print 出嚟做記錄）
+CACHE_DIR = os.path.join(HERE, "cache")
+SCHED_CACHE = os.path.join(CACHE_DIR, "schedule.json")
+SCHED_TTL_H = 6           # 開放時間表 cache 有效期（跨日／唔包今日+明日／過期先重抓）
+SCHED_SRC = ""            # cache | fetched | stale-cache | none
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120 Safari/537.36"
 
 # 分區中文名（queue-times 只提供英文）
@@ -118,13 +125,65 @@ SHOW_ZH = {
 
 
 def get_json(url, timeout=30):
-    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
-    with urllib.request.build_opener(urllib.request.ProxyHandler({})).open(req, timeout=timeout) as r:
-        return json.loads(r.read().decode("utf-8", "replace"))
+    """抓 JSON；遇 429/403/5xx 依 Retry-After 等一次再試，其餘直接拋（caller 決定）。"""
+    global REQS
+    for attempt in (1, 2):
+        REQS += 1
+        req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
+        try:
+            with urllib.request.build_opener(urllib.request.ProxyHandler({})).open(req, timeout=timeout) as r:
+                return json.loads(r.read().decode("utf-8", "replace"))
+        except urllib.error.HTTPError as e:
+            if attempt == 1 and e.code in (403, 429, 500, 502, 503, 504):
+                wait = min(int(e.headers.get("Retry-After") or 0) or 5, 60)
+                print(f"⏳ HTTP {e.code}（可能被限流），等 {wait}s 再試一次：{url}", file=sys.stderr)
+                time.sleep(wait)
+                continue
+            raise
 
 
 def fetch_queue_times():
     return get_json(f"https://queue-times.com/parks/{QT_PARK}/queue_times.json")
+
+
+def load_schedule():
+    """開放時間表：一個 call 回 31 日，所以一日抓一次就夠（省 ~107 個 request/日）。
+
+    快取喺 cache/schedule.json（唔會部署出去）；過期、跨日、或唔包含今日+明日 → 重抓。
+    抓唔到就用舊快取，完全冇就空 dict（前端會顯示「以官網為準」）。
+    """
+    now = dt.datetime.now(JST)
+    try:
+        with open(SCHED_CACHE, encoding="utf-8") as fh:
+            cached = json.load(fh)
+        fetched = dt.datetime.fromisoformat(cached.get("_fetchedAt", ""))
+        dates = {s.get("date") for s in cached.get("schedule", [])}
+        covers = now.date().isoformat() in dates and (now.date() + dt.timedelta(days=1)).isoformat() in dates
+        if covers and (now - fetched) < dt.timedelta(hours=SCHED_TTL_H):
+            global SCHED_SRC
+            SCHED_SRC = "cache"
+            return cached
+    except Exception:
+        pass
+    sched = fetch_wiki("schedule")
+    if sched:
+        SCHED_SRC = "fetched"
+        try:
+            os.makedirs(CACHE_DIR, exist_ok=True)
+            sched = dict(sched, _fetchedAt=now.isoformat(timespec="seconds"))
+            with open(SCHED_CACHE, "w", encoding="utf-8") as fh:
+                json.dump(sched, fh, ensure_ascii=False)
+        except Exception as e:
+            print(f"⚠️ schedule cache 寫唔入: {e}", file=sys.stderr)
+        return sched
+    try:
+        with open(SCHED_CACHE, encoding="utf-8") as fh:
+            cached = json.load(fh)
+        SCHED_SRC = "stale-cache"
+        return cached
+    except Exception:
+        SCHED_SRC = "none"
+        return {}
 
 
 def fetch_wiki(path):
@@ -225,7 +284,7 @@ def main():
     qt = fetch_queue_times()
     geo, center = load_geo()
     live = fetch_wiki("live")
-    sched = fetch_wiki("schedule")
+    sched = load_schedule()   # 一日一次（cache），唔係每 5 分鐘抓
 
     lands = land_of_ride(qt)
     rides = [r for l in lands for r in l["rides"]]
@@ -374,7 +433,8 @@ def main():
     print(f"OPEN={payload['stats']['open']}/{payload['stats']['total']} "
           f"AVG={payload['stats']['avgWait']} MAX={payload['stats']['maxWait']} "
           f"park={'open' if park_open else 'closed'} hours={payload['park']['hoursOpen']}-{payload['park']['hoursClose']} "
-          f"shows={len(shows)} hist={len(keys)} samples")
+          f"shows={len(shows)} hist={len(keys)} samples reqs={REQS}"
+          f" sched={SCHED_SRC}")
     return 0
 
 
