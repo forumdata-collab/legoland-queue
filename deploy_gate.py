@@ -41,7 +41,7 @@ def digest() -> str:
         d = json.load(fh)
     park = d.get("park") or {}
     visible = {
-        "park": {k: park.get(k) for k in ("open", "status", "hoursOpen", "hoursClose", "hoursDate")},
+        "park": {k: park.get(k) for k in ("open", "hoursOpen", "hoursClose", "hoursDate")},
         "stats": d.get("stats"),
         "lands": [{"name": l.get("name"), "nameZh": l.get("nameZh"),
                    "rides": [[r.get("name"), r.get("nameZh"), r.get("isOpen"), r.get("wait")]

@@ -390,8 +390,7 @@ def main():
         "park": {
             "name": "LEGOLAND Japan",
             "nameZh": "日本樂高樂園（名古屋）",
-            "open": park_open,
-            "status": park_live.get("status", ""),
+            "open": park_open,          # 由官網時段 + JST 時鐘判斷；唔寫 themeparks.wiki 嘅 status（佢會同 open 矛盾）
             "hoursOpen": fmt_hhmm((hours or {}).get("openingTime", "")),
             "hoursClose": fmt_hhmm((hours or {}).get("closingTime", "")),
             "hoursDate": (hours or {}).get("date", ""),
