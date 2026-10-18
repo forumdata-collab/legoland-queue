@@ -4,3 +4,8 @@ __pycache__/
 deploy.log
 preview/
 cache/
+# generated data（每 5 分鐘由 fetch_legoland.py 重生，唔需要入 git）
+site/data/legoland.json
+site/data/history.json
+# 分析用截圖
+shots/

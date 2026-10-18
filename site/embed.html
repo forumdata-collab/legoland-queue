@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="LEGOLAND Japan 即時等候時間（精簡版）：小朋友重點設施走勢 + 各時段平均等候。供 nagoya.we1co.me 行程頁嵌入。">
+<title>LEGOLAND 即時等候（精簡版）</title>
+<style>
+  :root{--bg:#0f172a;--card:#1e293b;--card2:#24334a;--text:#e2e8f0;--sub:#94a3b8;--green:#22c55e;--amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;--border:#334155;--lego:#f7d117}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;padding:12px 12px 18px;-webkit-text-size-adjust:100%}
+  .hd{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;border-bottom:1px solid var(--border);padding-bottom:8px}
+  .hd .t{font-size:.95rem;font-weight:700}
+  .hd .u{font-size:.68rem;color:var(--sub)}
+  .state{display:inline-flex;align-items:center;gap:5px;font-size:.7rem;padding:2px 9px;border-radius:999px;border:1px solid var(--border);color:var(--sub)}
+  .state.open{color:#052e16;background:var(--green);border-color:var(--green)}
+  .state.adv{color:#3b1d02;background:var(--amber);border-color:var(--amber)}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:8px;margin:11px 0 2px}
+  .tile{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:8px 10px;text-align:center}
+  .tile b{display:block;font-size:1.16rem;font-variant-numeric:tabular-nums}
+  .tile span{font-size:.63rem;color:var(--sub)}
+  .tile.w b{color:var(--amber)}.tile.l b{color:var(--red)}
+  h2{font-size:.78rem;font-weight:600;color:var(--sub);margin:14px 0 7px;letter-spacing:.03em}
+  .list{background:var(--card);border:1px solid var(--border);border-radius:13px;overflow:hidden}
+  .row{display:grid;grid-template-columns:1fr auto;gap:9px;align-items:center;padding:8px 12px;border-top:1px solid var(--border);font-size:.84rem}
+  .row:first-child{border-top:0}
+  .row .nm{min-width:0}
+  .row .nm b{font-weight:600;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .row .nm small{font-size:.64rem;color:var(--sub)}
+  .row .rt{display:flex;align-items:center;gap:8px}
+  .spark{display:block;line-height:0}
+  .strend{font-size:.64rem;color:var(--sub);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .strend.up{color:var(--red)}.strend.down{color:var(--green)}
+  .w{font-variant-numeric:tabular-nums;font-weight:700;font-size:.86rem;min-width:52px;text-align:right}
+  .w.short{color:var(--green)}.w.mid{color:var(--amber)}.w.long{color:var(--red)}.w.none{color:var(--sub);font-weight:400;font-size:.72rem}
+  .controls{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 7px}
+  .chip{font:inherit;font-size:.74rem;padding:4px 10px;border-radius:999px;background:var(--card);border:1px solid var(--border);color:var(--sub);cursor:pointer}
+  .chip:hover{border-color:var(--blue);color:var(--text)}
+  .chip.active{background:var(--blue);border-color:var(--blue);color:#fff}
+  .hbox{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:9px 12px}
+  .hrow{display:grid;grid-template-columns:42px 1fr auto;gap:8px;align-items:center;padding:3px 0;font-size:.76rem}
+  .hrow .hh{color:var(--sub);font-variant-numeric:tabular-nums}
+  .hrow .hbar{height:8px;border-radius:4px;background:rgba(59,130,246,.25);overflow:hidden}
+  .hrow .hbar i{display:block;height:100%;background:var(--blue);border-radius:4px}
+  .hrow .hv{font-variant-numeric:tabular-nums;white-space:nowrap}
+  .hrow .hv small{color:var(--sub);font-size:.64rem;margin-left:4px}
+  .hn{font-size:.66rem;color:var(--sub);margin-top:6px;line-height:1.6}
+  .empty{font-size:.76rem;color:var(--sub);padding:6px 0}
+  .fn{font-size:.66rem;color:var(--sub);margin-top:11px;line-height:1.65;border-top:1px solid var(--border);padding-top:8px}
+  .fn a{color:var(--blue);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="hd">
+  <span class="t">LEGOLAND Japan 即時等候</span>
+  <span id="state" class="state">載入中</span>
+  <span class="u" id="upd"></span>
+</div>
+<div class="tiles" id="tiles"></div>
+
+<h2>小朋友重點設施（即時 + 走勢）</h2>
+<div class="list" id="rides"><div class="empty">載入中…</div></div>
+
+<h2>各時段平均等候（累積歷史・JST）</h2>
+<div class="controls" id="dtypebar">
+  <button class="chip" data-dt="weekday">平日（一至五）</button>
+  <button class="chip active" data-dt="all">全部</button>
+  <button class="chip" data-dt="weekend">週末（六日）</button>
+</div>
+<div class="hbox" id="hourly"><div class="empty">載入中…</div></div>
+
+<div class="fn">
+  等候時間來自 queue-times.com 第三方公開資料，本站自行每 5 分鐘累積（<b>非官方</b>）；走勢線＝今日最近約 2 小時、每點 5 分鐘。時段平均會隨累積日數更新。
+  <a href="https://legoland.we1co.me/" target="_blank" rel="noopener">完整版：地圖・全部設施・表演時間表 →</a>
+</div>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  let DATA = null;
+  const state = { dayType: 'all' };
+
+  // 小朋友重點設施（以名稱關鍵字對應，跟 nagoya.we1co.me 攻略路線一致）
+  const TARGETS = [
+    { kw: ['the dragon'], zh: '龍之過山車', note: 'The Dragon・105cm+（105–120 需陪同）' },
+    { kw: ["dragon's apprentice", 'dragons apprentice', 'apprentice'], zh: '小龍過山車', note: "Dragon's Apprentice・90cm+" },
+    { kw: ['submarine'], zh: '潛水艇探險', note: 'Submarine Adventure・4D 海底' },
+    { kw: ['splash battle'], zh: '水炮大戰', note: 'Splash Battle・會濕身' },
+    { kw: ['observation'], zh: '展望塔', note: 'Observation Tower・全園全景' },
+    { kw: ['flying machines', 'merlin'], zh: '梅林飛行機', note: "Merlin's Flying Machines・90cm+" },
+    { kw: ['factory'], zh: '樂高工廠之旅', note: 'LEGO Factory Tour・室內' },
+    { kw: ['miniland'], zh: '迷你城市', note: 'Miniland・日本名勝積木' }
+  ];
+
+  const openWait = (r) => typeof r.wait === 'number' && r.wait > 0;
+  const wcls = (v) => (v == null ? 'none' : v <= 15 ? 'short' : v <= 30 ? 'mid' : 'long');
+  const wtext = (r) => {
+    if (r && r.wait === null && !r.isOpen) return '暫停／關閉';
+    if (r && typeof r.wait === 'number') return r.wait === 0 ? '0′' : r.wait + '′';
+    return '—';
+  };
+
+  function histToday() {
+    const h = (DATA && DATA.history) || [];
+    if (!h.length) return [];
+    const day = String(h[h.length - 1].t || '').slice(0, 10);
+    return h.filter((s) => String(s.t || '').slice(0, 10) === day);
+  }
+  function seriesFor(id) {
+    const h = histToday();
+    if (!h.length) return [];
+    const key = String(id);
+    return h.map((s) => (s.data && s.data[key] !== undefined ? s.data[key] : null));
+  }
+  function sparkSVG(series) {
+    const pts = series.map((v) => (v === null || v === undefined ? null : v));
+    const W = 104, H = 22, MAX = 60;
+    const step = pts.length > 1 ? W / (pts.length - 1) : W;
+    let d = '', last = null;
+    pts.forEach((v, i) => {
+      if (v === null) return;
+      const x = Math.round(i * step), y = Math.round(H - 2 - Math.min(v, MAX) / MAX * (H - 4));
+      d += (d ? ' ' : '') + x + ',' + y;
+      last = [x, y];
+    });
+    if (!d) return '';
+    const dot = last ? `<circle cx="${last[0]}" cy="${last[1]}" r="2" fill="#38bdf8"/>` : '';
+    return `<svg class="spark" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" aria-hidden="true"><polyline points="${d}" fill="none" stroke="#38bdf8" stroke-width="1.6"/>${dot}</svg>`;
+  }
+  function sparkLabel(series) {
+    const v = series.filter((x) => x !== null && x !== undefined);
+    if (v.length < 3) return { txt: '累積中 ' + v.length + '/' + series.length, cls: '' };
+    const a = v[0], b = v[v.length - 1];
+    if (b - a >= 5) return { txt: '↑ 變長 ' + (b - a) + '′', cls: 'up' };
+    if (a - b >= 5) return { txt: '↓ 變短 ' + (a - b) + '′', cls: 'down' };
+    return { txt: '→ 穩定', cls: '' };
+  }
+
+  function renderHead() {
+    const p = DATA.park || {};
+    const st = $('#state');
+    const open = p.open;
+    st.className = 'state ' + (open ? 'open' : '');
+    st.textContent = open ? '開放中' : '已閉園';
+    $('#upd').textContent = (p.hoursOpen && p.hoursClose ? p.hoursOpen + '–' + p.hoursClose + '（JST）・' : '') + '更新 ' + (DATA.updatedHkt || '');
+  }
+
+  function renderTiles() {
+    const rides = allRides();
+    const open = rides.filter((r) => r.isOpen);
+    const waits = open.filter((r) => typeof r.wait === 'number');
+    const avg = waits.length ? Math.round(waits.reduce((s, r) => s + r.wait, 0) / waits.length) : null;
+    const top = waits.slice().sort((a, b) => b.wait - a.wait)[0];
+    $('#tiles').innerHTML = `
+      <div class="tile"><b>${open.length}</b><span>開放中設施</span></div>
+      <div class="tile w"><b>${avg == null ? '—' : avg + '′'}</b><span>平均等候</span></div>
+      <div class="tile ${top && top.wait > 30 ? 'l' : ''}"><b>${top ? top.wait + '′' : '—'}</b><span>${top ? esc(String(top.name).slice(0, 14)) : '最長等候'}</span></div>`;
+  }
+
+  function allRides() {
+    const out = [];
+    ((DATA && DATA.lands) || []).forEach((l) => (l.rides || []).forEach((r) => out.push(r)));
+    return out;
+  }
+  function findTarget(t) {
+    const rides = allRides();
+    for (const kw of t.kw) {
+      const hit = rides.find((r) => String(r.name || '').toLowerCase().includes(kw));
+      if (hit) return hit;
+    }
+    return null;
+  }
+
+  function renderRides() {
+    const rows = TARGETS.map((t) => ({ t, r: findTarget(t) })).filter((x) => x.r);
+    if (!rows.length) { $('#rides').innerHTML = '<div class="empty">暫時未對應到設施資料。</div>'; return; }
+    $('#rides').innerHTML = rows.map(({ t, r }) => {
+      const s = seriesFor(r.id);
+      const valid = s.filter((v) => v !== null && v !== undefined).length;
+      const lab = sparkLabel(s);
+      return `<div class="row">
+        <div class="nm"><b>${esc(t.zh)}</b><small>${esc(t.note)}</small></div>
+        <div class="rt">
+          ${valid >= 2 ? `<span class="spark">${sparkSVG(s)}</span><span class="strend ${lab.cls}">${esc(lab.txt)}</span>` : '<span class="strend">數據累積中</span>'}
+          <span class="w ${wcls(typeof r.wait === 'number' ? r.wait : null)}">${esc(wtext(r))}</span>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  const DT_LABEL = { all: '全部日子', weekday: '平日（一至五）', weekend: '週末（六日）' };
+  function renderHourly() {
+    const byType = (DATA && DATA.hourlyByType) || {};
+    const rows = byType[state.dayType] || (DATA && DATA.hourly) || [];
+    const days = ((DATA || {}).dayTypeDays || {})[state.dayType];
+    const el = $('#hourly');
+    if (!rows.length) { el.innerHTML = `<div class="empty">${esc(DT_LABEL[state.dayType] || '')}尚未有足夠歷史數據。</div>`; return; }
+    const max = Math.max(...rows.map((r) => r.avg), 1);
+    el.innerHTML = rows.map((r) => `<div class="hrow">
+        <span class="hh">${esc(r.h)}:00</span>
+        <span class="hbar"><i style="width:${Math.round(r.avg / max * 100)}%"></i></span>
+        <span class="hv">${r.avg}′<small>最高 ${r.max}′</small></span>
+      </div>`).join('') +
+      `<div class="hn">${esc(DT_LABEL[state.dayType] || '')}（已累積 ${days == null ? '—' : days} 日）：該時段全部開放設施等候時間嘅平均，每 5 分鐘一個樣本。你 10/23（五）去可睇「平日」一欄。</div>`;
+  }
+
+  function load() {
+    fetch(`data/legoland.json?cb=${Date.now()}`)
+      .then((r) => r.json())
+      .then((j) => { DATA = j; renderHead(); renderTiles(); renderRides(); renderHourly(); })
+      .catch(() => { $('#upd').textContent = '資料載入失敗，請開完整版網站。'; });
+  }
+
+  document.querySelectorAll('.chip[data-dt]').forEach((c) => c.addEventListener('click', () => {
+    document.querySelectorAll('.chip[data-dt]').forEach((x) => x.classList.toggle('active', x === c));
+    state.dayType = c.dataset.dt; renderHourly();
+  }));
+
+  load();
+  setInterval(load, 5 * 60 * 1000);
+})();
+</script>
+</body>
+</html>

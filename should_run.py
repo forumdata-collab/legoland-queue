@@ -31,6 +31,22 @@ def now_jst() -> dt.datetime:
     return dt.datetime.now(JST)
 
 
+def hm(value: str):
+    """'10:00' 或 ISO '2026-10-18T10:00:00+08:00' 都可以 → (hour, minute)。
+
+    兩邊格式都見過（legoland/op 用 HH:MM，Disney 用 ISO），所以統一用呢個 helper，
+    唔好再直接 split(':') —— 直接 split ISO 字串會拋 ValueError，而 except 係 fail-open，
+    結果係閘門靜靜地永久失效（2026-10-18 迪士尼就係咁撞到）。
+    """
+    value = (value or "").strip()
+    try:
+        return dt.datetime.fromisoformat(value.replace("Z", "+00:00")).hour, \
+               dt.datetime.fromisoformat(value.replace("Z", "+00:00")).minute
+    except Exception:
+        pass
+    hh, mm = value.split(":")[:2]
+    return int(hh), int(mm)
+
 def main() -> int:
     now = now_jst()
     try:
@@ -45,8 +61,8 @@ def main() -> int:
         return 0  # 時段唔係今日（跨日／舊資料）→ 抓，順便更新當日時段
 
     try:
-        oh, om = (int(x) for x in opens.split(":"))
-        ch, cm = (int(x) for x in closes.split(":"))
+        oh, om = hm(opens)
+        ch, cm = hm(closes)
     except Exception:
         return 0
     start = now.replace(hour=oh, minute=om, second=0, microsecond=0) - dt.timedelta(minutes=GRACE_MIN)
