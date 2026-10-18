@@ -68,6 +68,9 @@
   .ride{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:9px 13px;border-top:1px solid var(--border);font-size:.85rem}
   .ride .nm{min-width:0}
   .ride .nm span{display:block;font-size:.66rem;color:var(--sub);margin-top:1px}
+  .ride .nm b{font-weight:600}
+  .ride .nm .en{display:inline;font-size:.7rem;color:var(--sub);font-weight:400;margin-left:6px}
+  .showrow .en{font-size:.72rem;color:var(--sub);margin-left:6px;font-weight:400}
   .wait{font-size:.78rem;font-weight:700;padding:3px 10px;border-radius:9px;white-space:nowrap;font-variant-numeric:tabular-nums}
   .wait.short{background:rgba(34,197,94,.16);color:var(--green)}
   .wait.mid{background:rgba(245,158,11,.16);color:var(--amber)}
@@ -172,7 +175,10 @@
     const series = seriesFor(r.id);
     const spark = series.filter((v) => v !== null && v !== undefined).length >= 2
       ? `<div class="spark"><span class="strend">${esc(sparkLabel(series))}</span>${sparkSVG(series)}</div>` : '';
-    return `<div class="ride"><div class="nm">${esc(r.name)}${t ? `<span>最後更新 ${t}（JST）</span>` : ''}</div>${badge}${spark}</div>`;
+    const title = r.nameZh
+      ? `<b>${esc(r.nameZh)}</b><span class="en">${esc(r.name)}</span>`
+      : `<b>${esc(r.name)}</b>`;
+    return `<div class="ride"><div class="nm">${title}${t ? `<span>最後更新 ${t}（JST）</span>` : ''}</div>${badge}${spark}</div>`;
   }
 
   const openWait = (r) => r.isOpen && r.wait > 0;
@@ -265,7 +271,7 @@
       <div class="tile"><b>${DATA.shows.length}</b><span>表演場次</span></div>`;
     const sh = $('#shows');
     sh.innerHTML = DATA.shows && DATA.shows.length ? DATA.shows.map((x) =>
-      `<div class="showrow">${esc(x.name)}${x.times && x.times.length
+      `<div class="showrow">${x.nameZh ? `<b>${esc(x.nameZh)}</b><span class="en">${esc(x.name)}</span>` : esc(x.name)}${x.times && x.times.length
         ? `<div class="times">${x.times.map((t) => `<span>${esc(t)}</span>`).join('')}</div>` : ''}</div>`).join('')
       : '<div class="empty">今日暫無表演資料。</div>';
   }
@@ -307,9 +313,11 @@
         const label = closed ? '—' : (r.isOpen ? (r.wait > 0 ? `${r.wait}′` : '即入') : '—');
         L.marker([r.lat, r.lon], {
           icon: L.divIcon({ className: '', html: `<span class="pin ${cls}">${label}</span>`, iconSize: [30, 18], iconAnchor: [15, 9] }),
-          title: r.name,
+          title: r.nameZh ? `${r.nameZh} / ${r.name}` : r.name,
         }).addTo(pinLayer).bindPopup(
-          `<b>${esc(r.name)}</b><br>${esc(l.nameZh || l.name)}<br>` +
+          `<b>${esc(r.nameZh || r.name)}</b><br>` +
+          (r.nameZh ? `${esc(r.name)}<br>` : '') +
+          `${esc(l.nameZh || l.name)}<br>` +
           (closed ? '園區已閉園' : r.isOpen ? (r.wait > 0 ? `等候 ${r.wait} 分鐘` : '開放・無需等候') : '暫停開放'));
       });
       if (pts.length) {
