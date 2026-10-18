@@ -7,6 +7,11 @@ cd /home/ubuntu/legoland-map || exit 1
 exec 9>/tmp/legoland-sync.lock
 flock -n 9 || exit 0
 
+# 營業時間（含前後 30 分鐘緩衝）每 5 分鐘抓；閉園後／開園前每 60 分鐘一次。
+# should_run.py: 0 = 抓, 10 = 跳過（其他非零 = 出錯，就照抓，fail-open）
+python3 should_run.py; gate=$?
+if [ "$gate" -eq 10 ]; then exit 0; fi
+
 out=$(python3 fetch_legoland.py 2>&1); rc=$?
 printf '[%s] rc=%s %s\n' "$(date '+%F %T')" "$rc" "$out" >> /home/ubuntu/legoland-map/deploy.log
 if [ "$rc" -ne 0 ]; then
